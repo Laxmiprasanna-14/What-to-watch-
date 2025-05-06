@@ -7,23 +7,40 @@ const app = express();
 app.use(cors());
 const PORT = 5000;
 
-// TMDB API Key - Create a .env file with: TMDB_API_KEY=your_key_here
+// Your TMDB API key in .env: TMDB_API_KEY=adaaYourRealKeyHere
 const TMDB_API_KEY = process.env.TMDB_API_KEY;
+console.log("Using TMDB API Key:", TMDB_API_KEY);
 
-// Test route
+// Root test route
 app.get('/', (req, res) => {
   res.send('Backend is working!');
 });
 
-// Movie route
-app.get('/api/movies', async (req, res) => {
+// Random movie suggestion (optional genre filter via query string)
+app.get('/api/random', async (req, res) => {
   try {
-    const response = await axios.get(
-      `https://api.themoviedb.org/3/movie/popular?api_key=${TMDB_API_KEY}`
-    );
-    res.json(response.data.results);
+    const { genre } = req.query;                     // e.g., ?genre=28 for Action
+    const genreFilter = genre ? `&with_genres=${genre}` : '';
+    const tmdbURL =
+      `https://api.themoviedb.org/3/discover/movie?api_key=${TMDB_API_KEY}` +
+      `&sort_by=popularity.desc${genreFilter}&language=en-US&page=1`;
+
+    // Fetch from TMDB
+    const response = await axios.get(tmdbURL);
+    const movies = response.data.results;
+    const randomMovie = movies[Math.floor(Math.random() * movies.length)];
+
+    res.json(randomMovie);
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    // Detailed server-side logging
+    console.error('Error fetching movie from TMDB:', {
+      message: error.message,
+      status: error.response?.status,
+      data: error.response?.data,
+    });
+    // Return specific error to frontend
+    const errorMsg = error.response?.data?.status_message || 'Failed to fetch movie from TMDB.';
+    res.status(500).json({ error: errorMsg });
   }
 });
 
