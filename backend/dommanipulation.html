@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <p>hello</p>
+  <p id="browser-info"></p> <!-- Added ID correctly -->
+  <button class = 'mybtn'>button1</button>
+  <button class = 'mybtn'>button3</button>
+  <button class = 'mybtn'>button2</button>
+</body>
+<script>
+  // 1. Show alert when page loads
+//   alert('Page loaded');
+
+//   // 2. Confirm before leaving the page
+//   window.addEventListener('beforeunload', (event) => {
+//     event.preventDefault();
+//     event.returnValue = '';
+//   });
+
+//   // 3. Create a button that navigates to another page
+//   const btn = document.createElement('button');
+//   btn.innerText = 'Click Me';
+//   btn.addEventListener('click', () => {
+//     location.href = 'https://www.example.com';
+//   });
+//   document.body.appendChild(btn);
+const btn = document.createElement('button');
+btn.innerText = 'Click Me';
+btn.addEventListener('mouseover',()=>
+
+console.log('Mouse over the button!'));
+btn.addEventListener('mouseout',()=>
+
+console.log('Mouse out the button!'));
+
+
+document.body.appendChild(btn);
+document.addEventListener('keydown', (event) => {
+  console.log("you pressed: " , event.key);
+});
+const button = document.querySelectorAll(".mybtn");
+button.forEach(btn => {
+    btn.addEventListener('click', () => {
+        console.log('Button clicked:', btn.innerText);
+    });
+})
+
+  document.getElementById("myBtn").addEventListener("click", function(event) {
+    console.log("Full event object:", event);        // Shows all event info
+    console.log("Target element:", event.target);    // Shows the button element
+    console.log("Tag name:", event.target.tagName);  // Outputs: BUTTON
+    console.log("Text inside:", event.target.innerText); // Outputs: Click Me
+  });
+
+
+
+</script>
+</html>
