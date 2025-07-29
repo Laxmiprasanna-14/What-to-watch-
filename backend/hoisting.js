@@ -25,3 +25,4 @@
 console.log(typeof Infinity)
 console.log(typeof Math.sqrt(-1)); 
 console.log("heloo"*3); // Output: NaN
+console.log("hello" * 3); // Output: NaN
