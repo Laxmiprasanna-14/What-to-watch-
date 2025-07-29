@@ -26,3 +26,6 @@ console.log(typeof Infinity)
 console.log(typeof Math.sqrt(-1)); 
 console.log("heloo"*3); // Output: NaN
 console.log("hello" * 3); // Output: NaN
+console.log("for testing purpose");
+console.log("now testing fro the another branch changes")
+console.log("testing to see if this shows up on git , the chnages are unstaged and to be viewed what are the changes made");
