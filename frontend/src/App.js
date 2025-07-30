@@ -89,7 +89,7 @@ function App() {
     }
 
     if (!movie) {
-        console.log('Failed to fetch movie after multiple attempts');
+        console.log('Failed to fetch movie after multiple attempts. retry later');
     }
   }
 
