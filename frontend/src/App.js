@@ -89,7 +89,7 @@ function App() {
     }
 
     if (!movie) {
-        console.log('Failed to fetch movie after multiple attempts. retry later');
+        console.log('Failed to fetch movie after multiple attempts , please check api key');
     }
   }
 
